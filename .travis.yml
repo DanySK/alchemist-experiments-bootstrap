@@ -67,8 +67,8 @@ _reduce_data_size: &reduce_data_size
   before_script:
     - echo Reducing data size to two seeds for quicker testing
     - mkdir -p data
-    - find data -name simulation*seed-[!01].0_*.txt | xargs -r rm
-
+    - DATA_FILES=$(find data -name simulation*seed-[!01].0_*.txt)
+    - test "$DATA_FILES" && rm $DATA_FILES
 _make_charts: &make_charts
   os: linux
   language: minimal
