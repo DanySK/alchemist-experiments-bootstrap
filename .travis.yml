@@ -66,7 +66,8 @@ stages:
 _reduce_data_size: &reduce_data_size
   before_script:
     - echo Reducing data size to two seeds for quicker testing
-    - if [ -d data ]; then find data -name simulation*seed-[!01].0_*.txt | xargs rm; fi
+    - mkdir -p data
+    - find data -name simulation*seed-[!01].0_*.txt | xargs rm
 
 _make_charts: &make_charts
   os: linux
@@ -93,7 +94,7 @@ _deploy: &deploy
   before_deploy:
     # The script requires appropriate git configuration.
     # This README's got my name so it's quicker for me to copy/paste. You want to change it.
-    - touch charts
+    - mkdir -p charts
     - tar -czvf "charts.tar.gz" -C $TRAVIS_BUILD_DIR/charts/ .
     - git config --local user.name "Danilo Pianini"
     - git config --local user.email "danilo.pianini@gmail.com"
