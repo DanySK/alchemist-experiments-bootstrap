@@ -93,6 +93,7 @@ _deploy: &deploy
   before_deploy:
     # The script requires appropriate git configuration.
     # This README's got my name so it's quicker for me to copy/paste. You want to change it.
+    - touch charts
     - tar -czvf "charts.tar.gz" -C $TRAVIS_BUILD_DIR/charts/ .
     - git config --local user.name "Danilo Pianini"
     - git config --local user.email "danilo.pianini@gmail.com"
