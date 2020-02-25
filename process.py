@@ -255,7 +255,7 @@ if __name__ == '__main__':
     import pickle
     import os
     if os.path.exists(directory):
-        newestFileTime = max(os.path.getmtime(directory + '/' + file) for file in os.listdir(directory))
+        newestFileTime = max([os.path.getmtime(directory + '/' + file) for file in os.listdir(directory)], default=0.0)
         try:
             lastTimeProcessed = pickle.load(open('timeprocessed', 'rb'))
         except:
@@ -292,6 +292,8 @@ if __name__ == '__main__':
                     dataset.coords[k] = v
                 if len(allfiles) == 0:
                     print("WARNING: No data for experiment " + experiment)
+                    means[experiment] = dataset
+                    stdevs[experiment] = xr.Dataset()
                 else:
                     varNames = extractVariableNames(allfiles[0])
                     for v in varNames:
