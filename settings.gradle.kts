@@ -6,5 +6,13 @@
  * Detailed information about configuring a multi-project build in Gradle can be found
  * in the user guide at https://docs.gradle.org/5.0/userguide/multi_project_builds.html
  */
+import de.fayard.dependencies.bootstrapRefreshVersionsAndDependencies
 
 rootProject.name = "alchemist-primer"
+
+buildscript {
+    repositories { gradlePluginPortal() }
+    dependencies.classpath("de.fayard:dependencies:0.5.7")
+}
+
+bootstrapRefreshVersionsAndDependencies()

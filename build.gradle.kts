@@ -2,7 +2,7 @@ import java.io.ByteArrayOutputStream
 
 plugins {
     application
-    kotlin("jvm") version "1.3.61"
+    kotlin("jvm")
 }
 
 repositories {
@@ -25,7 +25,8 @@ sourceSets {
     }
 }
 dependencies {
-    implementation("it.unibo.alchemist:alchemist:9.3.0")
+    implementation("it.unibo.alchemist:alchemist:_")
+    implementation("it.unibo.alchemist:alchemist-incarnation-protelis:_")
     implementation(kotlin("stdlib-jdk8"))
 }
 
