@@ -6,7 +6,7 @@ _python_reference_environment: &python_reference_environment
   env: *python_reference_version
 
 _repo_filter: &repo_filter
-  repo: DanySK/<REPONAME>
+  repo: DanySK/REPONAME
 
 # System
 
