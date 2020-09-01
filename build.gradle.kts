@@ -1,4 +1,5 @@
 import java.io.ByteArrayOutputStream
+import java.awt.GraphicsEnvironment
 
 plugins {
     application
@@ -27,7 +28,9 @@ sourceSets {
 dependencies {
     implementation("it.unibo.alchemist:alchemist:_")
     implementation("it.unibo.alchemist:alchemist-incarnation-protelis:_")
-    implementation("it.unibo.alchemist:alchemist-swingui:_")
+    if (!GraphicsEnvironment.isHeadless()) {
+        implementation("it.unibo.alchemist:alchemist-swingui:_")
+    }
     implementation(kotlin("stdlib-jdk8"))
 }
 
@@ -76,12 +79,11 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             description = "Launches graphic simulation ${it.nameWithoutExtension}"
             main = "it.unibo.alchemist.Alchemist"
             classpath = sourceSets["main"].runtimeClasspath
-            args(
-                "-y", it.absolutePath,
-                "-g", "effects/${it.nameWithoutExtension}.aes"
-            )
+            args("-y", it.absolutePath)
             if (System.getenv("CI") == "true") {
                 args("-hl", "-t", "2")
+            } else {
+                args("-g", "effects/${it.nameWithoutExtension}.aes")
             }
             this.additionalConfiguration()
         }
