@@ -31,3 +31,5 @@ jobs:
           MERGE_METHOD: "rebase"
           CLOSE_ON_CONFLICT: "true"
           DELETE_BRANCH_ON_CLOSE: "true"
+          GIT_USER_NAME: "Danilo Pianini"
+          GIT_USER_EMAIL: "danilo.pianini@gmail.com"
