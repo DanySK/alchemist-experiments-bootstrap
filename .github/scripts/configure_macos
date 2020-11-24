@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+PIP=$(which pip)
+PIP3=$(which pip3)
+sudo rm $PIP
+sudo ln -s $PIP3 $PIP
+python --version
+pip --version
