@@ -56,6 +56,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          MESSAGE=$(git tag -l --format='%(contents)' "$TAG")
+          MESSAGE="$(cat << RELEASE_MESSAGE
+          Release $TAG
+
+          $(git tag -l --format='%(contents)' "$TAG")
+          RELEASE_MESSAGE
+          )"
           hub release create -m "$MESSAGE" "$TAG" || true
           hub release edit -m '' -a "charts.tar.zst" "$TAG"
