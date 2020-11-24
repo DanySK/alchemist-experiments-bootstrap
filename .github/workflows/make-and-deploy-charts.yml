@@ -27,6 +27,8 @@ jobs:
         run: pip install --upgrade pip --user
       - name: Install requirements
         run: pip install -r requirements.txt --user
+      - name: Prepare charts folder
+        run: mkdir -p charts
       - name: Generate charts
         run: python process.py
       - name: Generate archive
