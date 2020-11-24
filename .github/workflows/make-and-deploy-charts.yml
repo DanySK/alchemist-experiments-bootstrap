@@ -58,4 +58,4 @@ jobs:
         run: |
           MESSAGE=$(git tag -l --format='%(contents)' "$TAG")
           hub release create -m "$MESSAGE" "$TAG" || true
-          hub release edit -m '' -a "charts.zst" "$TAG"
+          hub release edit -m '' -a "charts.tar.zst" "$TAG"
