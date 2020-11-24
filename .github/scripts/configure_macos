@@ -4,5 +4,9 @@ PIP=$(which pip)
 PIP3=$(which pip3)
 sudo rm $PIP
 sudo ln -s $PIP3 $PIP
-python --version
 pip --version
+PYTHON=$(which python)
+PYTHON3=$(which python3)
+sudo rm $PYTHON
+sudo ln -s $PYTHON3 $PYTHON
+python --version
