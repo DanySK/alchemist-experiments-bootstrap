@@ -30,7 +30,7 @@ jobs:
       - name: Generate charts
         run: python process.py
       - name: Generate archive
-        run: zstd -19 charts -o charts.zst
+        run: tar --zstd -cf charts.tar.zst charts/
       - name: Download autotag
         run: curl -sL https://github.com/DanySK/Gravis-CI/raw/master/autotag > autotag
       - name: Make autotag executable
