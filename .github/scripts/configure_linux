@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-unless sudo apt install python-is-python3; then
+if ! sudo apt install python-is-python3; then
     PYTHON=$(which python)
     rm $PYTHON
     sudo ln -s $(which python3) $PYTHON
