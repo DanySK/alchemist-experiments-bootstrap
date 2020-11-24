@@ -2,7 +2,7 @@
 set -e
 if ! sudo apt install python-is-python3; then
     PYTHON=$(which python)
-    rm $PYTHON
+    sudo rm $PYTHON
     sudo ln -s $(which python3) $PYTHON
 fi
 python --version
