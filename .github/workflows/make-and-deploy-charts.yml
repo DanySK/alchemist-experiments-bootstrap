@@ -19,7 +19,6 @@ jobs:
       # Install additional packages
       - name: Configure Linux
         shell: bash
-        if: ${{ env.COMPATIBLE == 'true' && contains(matrix.os, 'ubuntu') }}
         run: |
           if [ -x .github/scripts/configure_linux ]; then
             .github/scripts/configure_linux
