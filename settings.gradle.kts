@@ -12,4 +12,4 @@ buildscript {
 }
 bootstrapRefreshVersions(justAdditionalAliases)
 
-rootProject.name = "alchemmist-experiments-bootstrap"
+rootProject.name = "alchemist-experiments-bootstrap"
