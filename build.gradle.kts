@@ -25,6 +25,13 @@ sourceSets {
         }
     }
 }
+
+fun onJava16AndAbove(body: () -> Unit) {
+    if (JavaVersion.current() >= JavaVersion.VERSION_16) {
+        body()
+    }
+}
+
 dependencies {
     implementation("it.unibo.alchemist:alchemist:_")
     implementation("it.unibo.alchemist:alchemist-incarnation-protelis:_")
@@ -32,6 +39,11 @@ dependencies {
         implementation("it.unibo.alchemist:alchemist-swingui:_")
     }
     implementation(kotlin("stdlib-jdk8"))
+    onJava16AndAbove {
+        runtimeOnly("com.google.inject:guice:_")
+        runtimeOnly("org.eclipse.xtext:org.eclipse.xtext:_")
+        runtimeOnly("org.eclipse.xtext:org.eclipse.xtext.xbase:_")
+    }
 }
 
 // Heap size estimation for batches
@@ -77,6 +89,9 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
         fun basetask(name: String, additionalConfiguration: JavaExec.() -> Unit = {}) = tasks.register<JavaExec>(name) {
             group = alchemistGroup
             description = "Launches graphic simulation ${it.nameWithoutExtension}"
+            onJava16AndAbove {
+                jvmArgs("--illegal-access=permit")
+            }
             main = "it.unibo.alchemist.Alchemist"
             classpath = sourceSets["main"].runtimeClasspath
             args("-y", it.absolutePath)
