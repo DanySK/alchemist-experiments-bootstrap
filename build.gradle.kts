@@ -1,19 +1,17 @@
-import java.io.ByteArrayOutputStream
 import java.awt.GraphicsEnvironment
+import java.io.ByteArrayOutputStream
 
 plugins {
     application
-    kotlin("jvm")
+    alias(libs.plugins.gitSemVer)
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.qa)
+    alias(libs.plugins.multiJvmTesting)
+    alias(libs.plugins.taskTree)
 }
 
 repositories {
     mavenCentral()
-    /* 
-     * The following repositories contain beta features and should be added for experimental mode only
-     * 
-     * maven("https://dl.bintray.com/alchemist-simulator/Alchemist/")
-     * maven("https://dl.bintray.com/protelis/Protelis/")
-     */
 }
 /*
  * Only required if you plan to use Protelis, remove otherwise
@@ -26,30 +24,29 @@ sourceSets {
     }
 }
 
-fun onJava16AndAbove(body: () -> Unit) {
-    if (JavaVersion.current() >= JavaVersion.VERSION_16) {
-        body()
+val usesJvm: Int = File(File(projectDir, "util"), "Dockerfile")
+    .readText()
+    .let {
+        Regex("FROM\\s+openjdk:(\\d+)\\s+$").find(it)?.groups?.get(1)?.value
+            ?: throw IllegalStateException("Cannot read information on the JVM to use.")
     }
+    .toInt()
+
+multiJvm {
+    jvmVersionForCompilation.set(usesJvm)
 }
 
 dependencies {
-    implementation("it.unibo.alchemist:alchemist:_")
-    implementation("it.unibo.alchemist:alchemist-incarnation-protelis:_")
-    if (!GraphicsEnvironment.isHeadless()) {
-        implementation("it.unibo.alchemist:alchemist-swingui:_")
-    }
     implementation(kotlin("stdlib-jdk8"))
-    onJava16AndAbove {
-        runtimeOnly("com.google.inject:guice:_")
-        runtimeOnly("org.eclipse.xtext:org.eclipse.xtext:_")
-        runtimeOnly("org.eclipse.xtext:org.eclipse.xtext.xbase:_")
+    implementation(libs.bundles.alchemist.protelis)
+    if (!GraphicsEnvironment.isHeadless()) {
+        implementation("it.unibo.alchemist:alchemist-swingui:${libs.versions.alchemist.get()}")
     }
 }
 
 // Heap size estimation for batches
 val maxHeap: Long? by project
-val heap: Long = maxHeap ?:
-if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+val heap: Long = maxHeap ?: if (System.getProperty("os.name").toLowerCase().contains("linux")) {
     ByteArrayOutputStream().use { output ->
         exec {
             executable = "bash"
@@ -57,15 +54,14 @@ if (System.getProperty("os.name").toLowerCase().contains("linux")) {
             standardOutput = output
         }
         output.toString().trim().toLong() / 1024
-    }
-        .also { println("Detected ${it}MB RAM available.") }  * 9 / 10
+    }.also { println("Detected ${it}MB RAM available.") } * 9 / 10
 } else {
     // Guess 16GB RAM of which 2 used by the OS
     14 * 1024L
 }
 val taskSizeFromProject: Int? by project
 val taskSize = taskSizeFromProject ?: 512
-val threadCount = maxOf(1, minOf(Runtime.getRuntime().availableProcessors(), heap.toInt() / taskSize ))
+val threadCount = maxOf(1, minOf(Runtime.getRuntime().availableProcessors(), heap.toInt() / taskSize))
 
 val alchemistGroup = "Run Alchemist"
 /*
@@ -89,9 +85,6 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
         fun basetask(name: String, additionalConfiguration: JavaExec.() -> Unit = {}) = tasks.register<JavaExec>(name) {
             group = alchemistGroup
             description = "Launches graphic simulation ${it.nameWithoutExtension}"
-            onJava16AndAbove {
-                jvmArgs("--illegal-access=permit")
-            }
             main = "it.unibo.alchemist.Alchemist"
             classpath = sourceSets["main"].runtimeClasspath
             args("-y", it.absolutePath)
@@ -100,6 +93,11 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             } else {
                 args("-g", "effects/${it.nameWithoutExtension}.aes")
             }
+            javaLauncher.set(
+                javaToolchains.launcherFor {
+                    languageVersion.set(JavaLanguageVersion.of(usesJvm))
+                }
+            )
             this.additionalConfiguration()
         }
         val capitalizedName = it.nameWithoutExtension.capitalize()
@@ -120,4 +118,3 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
         }
         runAllBatch.dependsOn(batch)
     }
-
