@@ -20,6 +20,8 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
+      - name: Checkout
+        uses: danysk/action-checkout@0.1.0
       - id: version
         run: |
           echo "::set-output name=version::$(./gradlew printGit | grep -oP '^Version computed by GitSemVer: \K.*$')"
@@ -38,6 +40,8 @@ jobs:
           python-version: '3.x'
       - name: Upgrade pip
         run: pip install --upgrade pip --user
+      - name: Checkout
+        uses: danysk/action-checkout@0.1.0
       - name: Install requirements
         run: pip install -r requirements.txt --user
       - name: Prepare charts folder
