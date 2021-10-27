@@ -1,2 +1,2 @@
 # This is a fake docker file, used solely for triggering Renovate JVM updates.
-FROM openjdk:16
+FROM openjdk:17
