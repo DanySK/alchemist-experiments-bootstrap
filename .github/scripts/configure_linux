@@ -1,8 +1,0 @@
-#!/bin/bash
-set -e
-if ! sudo apt install python-is-python3; then
-    PYTHON=$(which python)
-    sudo rm $PYTHON
-    sudo ln -s $(which python3) $PYTHON
-fi
-python --version
