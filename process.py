@@ -92,7 +92,7 @@ def extractCoordinates(filename):
         dataBegin = r"\d"
         is_float = r"[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?"
         for line in file:
-            match = re.findall(regex, line)
+            match = re.findall(regex, line.replace('Infinity', '1e30000'))
             if match:
                 return {
                     var : float(value) if re.match(is_float, value)
