@@ -61,6 +61,7 @@ jobs:
         name: Create GitHub Release
         with:
           tag: ${{ needs.compute-version.outputs.version }}
+          allowUpdates: true
           replacesArtifacts: true
           artifacts: charts.tar.zst
           token: ${{ secrets.GITHUB_TOKEN }}
