@@ -33,21 +33,24 @@ jobs:
       deploy-command: true
   create-charts-and-deploy:
     runs-on: ubuntu-latest
-    needs: [Compute-Version]
+    needs: [compute-version]
     steps:
-      - uses: actions/setup-python@v3
-        with:
-          python-version: '3.x'
+      - name: Checkout
+        uses: danysk/action-checkout@0.2.1
       - uses: actions/cache@v3
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
+      - name: Install pyenv
+        uses: gabrielfalcao/pyenv-action@v9
+        with:
+          command: pyenv install
+      - name: Install Python
+        run: pyenv install
       - name: Upgrade pip
         run: pip install --upgrade pip --user
-      - name: Checkout
-        uses: danysk/action-checkout@0.2.1
       - name: Install requirements
         run: pip install -r requirements.txt --user
       - name: Prepare charts folder
