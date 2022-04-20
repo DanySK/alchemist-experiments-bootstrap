@@ -26,7 +26,10 @@ jobs:
         run: |
           echo "::set-output name=version::$(./gradlew printGit | grep -oP '^Version computed by GitSemVer: \K.*$')"
   check-simulations:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ windows, macos, ubuntu ]
+    runs-on: ${{ matrix.os }}-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3.0.1
@@ -40,7 +43,7 @@ jobs:
     needs: [compute-version]
     steps:
       - name: Checkout
-        uses: danysk/action-checkout@0.2.1
+        uses: actions/checkout@v3.0.1
       - uses: actions/cache@v3
         with:
           path: ~/.cache/pip
