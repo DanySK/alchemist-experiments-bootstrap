@@ -26,11 +26,13 @@ jobs:
         run: |
           echo "::set-output name=version::$(./gradlew printGit | grep -oP '^Version computed by GitSemVer: \K.*$')"
   check-simulations:
-    uses: DanySK/workflows/.github/workflows/build-and-deploy-gradle-project.yml@0.1.0-dev41
-    with:
-      build-command: true
-      check-command: ./gradlew runAllGraphic
-      deploy-command: true
+    runs-on: ubuntu-latest
+    steps:
+    - uses: DanySK/build-check-deploy-gradle-action@1.2.12
+      with:
+        build-command: true
+        check-command: ./gradlew runAllGraphic
+        deploy-command: true
   create-charts-and-deploy:
     runs-on: ubuntu-latest
     needs: [compute-version]
