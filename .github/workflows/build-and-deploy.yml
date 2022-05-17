@@ -38,6 +38,7 @@ jobs:
         build-command: true
         check-command: ./gradlew runAllGraphic
         deploy-command: true
+        should-run-codecov: false
   create-charts-and-deploy:
     runs-on: ubuntu-latest
     needs: [compute-version]
