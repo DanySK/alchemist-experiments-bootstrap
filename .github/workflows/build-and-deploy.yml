@@ -32,7 +32,7 @@ jobs:
     runs-on: ${{ matrix.os }}-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3.0.1
+      uses: actions/checkout@v3.0.2
     - uses: DanySK/build-check-deploy-gradle-action@1.2.12
       with:
         build-command: true
@@ -43,7 +43,7 @@ jobs:
     needs: [compute-version]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.0.1
+        uses: actions/checkout@v3.0.2
       - uses: actions/cache@v3
         with:
           path: ~/.cache/pip
