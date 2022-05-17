@@ -75,3 +75,10 @@ jobs:
           replacesArtifacts: true
           artifacts: charts.tar.zst
           token: ${{ secrets.GITHUB_TOKEN }}
+  ci-success:
+    runs-on: ubuntu-latest
+    needs: [create-charts-and-deploy, check-simulations]
+    if: always() && !contains(join(needs.*.result, ','), 'cancelled')
+    steps:
+      - name: All phases successful
+        run: ${{ !contains(join(needs.*.result, ','), 'failure') }}
