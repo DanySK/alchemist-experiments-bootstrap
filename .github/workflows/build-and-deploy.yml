@@ -67,7 +67,7 @@ jobs:
         run: python process.py
       - name: Generate archive
         run: tar --use-compress-program zstd -cf charts.tar.zst charts/
-      - uses: ncipollo/release-action@v1.11.2
+      - uses: ncipollo/release-action@v1.12.0
         if: ${{ github.event_name != 'pull_request' }}
         name: Create GitHub Release
         with:
