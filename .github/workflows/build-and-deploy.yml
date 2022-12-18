@@ -21,7 +21,7 @@ jobs:
       version: ${{ steps.version.outputs.version }}
     steps:
       - name: Checkout
-        uses: danysk/action-checkout@0.2.3
+        uses: danysk/action-checkout@0.2.4
       - id: version
         run: |
           echo "::set-output name=version::$(./gradlew printGit | grep -oP '^Version computed by GitSemVer: \K.*$')"
