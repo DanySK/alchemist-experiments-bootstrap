@@ -51,12 +51,8 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-      - name: Install pyenv
-        uses: gabrielfalcao/pyenv-action@v11
-        with:
-          command: pyenv install
-      - name: Install Python
-        run: pyenv install
+      - name: Install python
+        uses: actions/setup-python@v4.5.0
       - name: Upgrade pip
         run: pip install --upgrade pip --user
       - name: Install requirements
