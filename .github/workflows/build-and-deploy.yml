@@ -57,9 +57,9 @@ jobs:
       - check-simulations-native
       - create-charts
     runs-on: ubuntu-22.04
-    permissions:
-      contents: write
-      packages: write
+    concurrency:
+      # Only one release job at a time per branch, as only master releases.
+      group: release-${{ github.event.number || github.ref }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3.3.0
