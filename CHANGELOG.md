@@ -1,3 +1,29 @@
+## [1.0.1](https://github.com/DanySK/Alchemist-experiments-startup/compare/1.0.0...1.0.1) (2023-01-19)
+
+
+### Documentation
+
+* clarify the need for the DEPLOYMENT_TOKEN in the readme ([534533b](https://github.com/DanySK/Alchemist-experiments-startup/commit/534533b7826dce6ebf3304fdea2807aa1c9d982b))
+
+
+### Build and continuous integration
+
+* cancel in-progress charts rendering on new pushes ([a377004](https://github.com/DanySK/Alchemist-experiments-startup/commit/a3770040cdc89b8a3805961d5774f8bddeb2c7b7))
+* cancel in-progress simulation checks on new pushes ([0e37030](https://github.com/DanySK/Alchemist-experiments-startup/commit/0e37030dae0c91f615b5fa2c3bedf2d18aca2194))
+* **deps:** update dependency macos github actions runner to v12 ([e219ab1](https://github.com/DanySK/Alchemist-experiments-startup/commit/e219ab16b0ceb4c8ca75795660c5d3b4fba9a3f9))
+* **deps:** update dependency windows github actions runner to v22 ([238a30d](https://github.com/DanySK/Alchemist-experiments-startup/commit/238a30dda649405d7a5e3fd8729d8182df499d4d))
+* limit the concurrency of the release jobs ([6b3c238](https://github.com/DanySK/Alchemist-experiments-startup/commit/6b3c238de08c2f9b9501c21f75ecb2001f0294a8))
+* recover the build functionality ([6197c5c](https://github.com/DanySK/Alchemist-experiments-startup/commit/6197c5cc5ecd23272d7dbe82765a3a5b8c06d419))
+
+
+### Dependency updates
+
+* **deps:** update alchemist to v25.7.1 ([b54e7c5](https://github.com/DanySK/Alchemist-experiments-startup/commit/b54e7c5e7930c35772d55ebb19c2c163f5e85aec))
+* **deps:** update plugin com.gradle.enterprise to v3.12.2 ([4513d0f](https://github.com/DanySK/Alchemist-experiments-startup/commit/4513d0feb288272453a4ff1b9643bfa802f907ac))
+* **deps:** update plugin gitsemver to v1 ([87b688e](https://github.com/DanySK/Alchemist-experiments-startup/commit/87b688ee5c2fe3072f8f3107686d25aa6f6749a2))
+* **deps:** update plugin tasktree to v2.1.1 ([761aded](https://github.com/DanySK/Alchemist-experiments-startup/commit/761aded54c3f9da7f35e1a035920b859d79d6bbf))
+* **deps:** update python docker tag to v3.11.1 ([920a338](https://github.com/DanySK/Alchemist-experiments-startup/commit/920a338227325a047a8d5ab309e6f92390168e1a))
+
 ## 1.0.0 (2023-01-19)
 
 
