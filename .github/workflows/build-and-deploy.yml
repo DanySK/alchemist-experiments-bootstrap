@@ -5,7 +5,6 @@ on:
 
 jobs:
   check-simulations-native:
-    if: ${{ !contains(github.ref, 'master') }}
     strategy:
       matrix:
         os: [ windows-2019, macos-11, ubuntu-22.04 ]
@@ -49,7 +48,7 @@ jobs:
           path: charts.tar.zst
   release:
     needs:
-#      - check-simulations-native
+      - check-simulations-native
       - create-charts
     runs-on: ubuntu-22.04
     permissions:
