@@ -95,6 +95,9 @@ jobs:
         with:
           node-version: ${{ steps.node-version.outputs.version }}
       - name: Login to dockerhub
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: danysk
         run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin docker.io
       - name: Semantic Release
         env:
