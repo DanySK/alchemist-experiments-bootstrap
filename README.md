@@ -31,22 +31,28 @@ Upon generation of an experiment from this template:
     - `./gradlew runAllBatch` on Linux, MacOS, or Windows if a bash-compatible shell is available;
     - `gradlew.bat runAllBatch` on Windows cmd or Powershell;
 4. Once the experiment is finished, the results will be available in the `data` folder. Run:
-   - `pip install --upgrade pip`
-   - `pip install -r requirements.txt`
-   - `python process.py`
+    - `pip install --upgrade pip`
+    - `pip install -r requirements.txt`
+    - `python process.py`
 5. The charts will be available in the `charts` folder.
 
 ## Inspect a single experiment
 
-Follow the instructions for reproducing the entire experiment, but instead of running `runAllBatch`,
+Follow the instructions for reproducing the entire experiment natively, but instead of running `runAllBatch`,
 run `runEXPERIMENTGraphics`, replacing `EXPERIMENT` with the name of the experiment you want to run
 (namely, with the name of the YAML simulation file).
 
 If in doubt, run `./gradlew tasks` to see the list of available tasks.
 
+To make changes to existing experiments and explore/reuse,
+we recommend to use the IntelliJ Idea IDE.
+Opening the project in IntelliJ Idea will automatically import the project, download the dependencies,
+and allow for a smooth development experience.
+
 ## Regenerate the charts
 
 We keep a copy of the data in this repository,
 so that the charts can be regenerated without having to run the experiment again.
-To regenerate the charts, follow the steps or the "reproduce natively" section,
+To regenerate the charts, run `docker compose run --no-deps charts`.
+Alternatively, follow the steps or the "reproduce natively" section,
 starting after the part describing how to re-launch the simulations.
