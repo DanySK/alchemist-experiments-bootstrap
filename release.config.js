@@ -2,7 +2,7 @@ var prepareCmd = `
 echo version=\${nextRelease.version} > gradle.properties
 echo VERSION="\${nextRelease.version}" > .env
 echo PROJECT_NAME=$(grep -Po 'rootProject\\s*\\.\\s*name\\s*=\\s*"\\K[\\w-]+(?=")' settings.gradle.kts) >> .env
-git commit -a -m "chore(release): update version descriptors to \${nextRelease.version}"
+git commit -a -m "chore(release): \${nextRelease.version} [skip ci]"
 git push
 docker compose build
 `
