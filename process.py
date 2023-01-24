@@ -238,7 +238,9 @@ if __name__ == '__main__':
         'msqer@harmonicCentrality[Min]': Measure(r'$\min{(' + mse(centrality_label) + ')}$'),
         'msqer@harmonicCentrality[Mean]': Measure(f'${expected(mse(centrality_label))}$'),
         'msqer@harmonicCentrality[StandardDeviation]': Measure(f'${stdev_of(mse(centrality_label))}$'),
-        'org:protelis:armonicCentralityHLL[Mean]': Measure(f'${expected(centrality_label)}$'),
+        'org:protelis:tutorial:distanceTo[max]': Measure(r'$m$', 'max distance'),
+        'org:protelis:tutorial:distanceTo[mean]': Measure(r'$m$', 'mean distance'),
+        'org:protelis:tutorial:distanceTo[min]': Measure(r'$m$', ',min distance'),
     }
     def derivativeOrMeasure(variable_name):
         if variable_name.endswith('dt'):

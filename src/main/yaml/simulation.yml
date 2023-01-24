@@ -1,5 +1,22 @@
 incarnation: protelis
 
+variables:
+  seed: &seed
+    min: 0
+    max: 1
+    step: 1
+    default: 0
+  spacing: &spacing
+    type: ArbitraryVariable
+    parameters: [0.25, [0.25, 0.5]]
+  error: &error
+    type: ArbitraryVariable
+    parameters: [0.1, [0.1, 0.2]]
+
+seeds:
+  scenario: *seed
+  simulation: *seed
+
 network-model:
   type: ConnectWithinDistance
   parameters: [0.5]
@@ -17,7 +34,7 @@ _gradient: &gradient
 
 deployments:
   type: Grid
-  parameters: [-5, -5, 5, 5, 0.25, 0.25, 0.1, 0.1]
+  parameters: [-5, -5, 5, 5, *spacing, *spacing, *error, *error]
   contents:
     - in:
         type: Rectangle
@@ -25,3 +42,28 @@ deployments:
       molecule: source
       concentration: true
   programs: *gradient
+
+export:
+#  - type: MongoDBExporter
+#    parameters:
+#      uri: mongodb://localhost:27017
+#      dbName: simulation
+#    data:
+#      - time
+#      - molecule: "org:protelis:tutorial:distanceTo"
+#        aggregators: [mean, min, max]
+#        value-filter: onlyfinite
+  - type: CSVExporter
+    parameters:
+      fileNameRoot: simulation
+      interval: 1
+      exportPath: data
+    data:
+      - time
+      - molecule: "org:protelis:tutorial:distanceTo"
+        aggregators: [mean, min, max]
+        value-filter: onlyfinite
+
+terminate:
+  type: AfterTime
+  parameters: 150
