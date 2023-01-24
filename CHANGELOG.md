@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/DanySK/alchemist-experiments-bootstrap/compare/1.1.0...1.1.1) (2023-01-24)
+
+
+### Bug Fixes
+
+* **release:** move the preparation commands to the prepare phase ([ee52de2](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/ee52de20fa26653febcfdc158884b38ad2a209d8))
+
 ## [1.1.0](https://github.com/DanySK/alchemist-experiments-bootstrap/compare/1.0.1...1.1.0) (2023-01-24)
 
 
