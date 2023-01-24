@@ -1,0 +1,50 @@
+version: '3'
+services:
+  prepare:
+    image: alpine:3.17.1
+    volumes:
+      - .:/experiment:rw
+    entrypoint: /bin/sh -c
+    command:
+      - |
+        mkdir -p /experiment/data
+        chmod 777 /experiment/data
+        mkdir -p /experiment/charts
+        chmod 777 /experiment/charts
+  simulation:
+    depends_on:
+      prepare:
+        condition: service_completed_successfully
+    image: ${PROJECT_NAME:-unknown}-simulation:${VERSION:-latest}
+    build:
+      dockerfile: ./docker/sim/Dockerfile
+      context: .
+    volumes:
+     - ./data:/experiment/data
+  charts:
+    depends_on:
+      prepare:
+        condition: service_completed_successfully
+      simulation:
+        condition: service_completed_successfully
+    image: ${PROJECT_NAME:-unknown}-charts:${VERSION:-latest}
+    build:
+      dockerfile: ./docker/charts/Dockerfile
+      context: .
+    volumes:
+      - ./data:/experiment/data
+      - ./charts:/experiment/charts
+  finish:
+    depends_on:
+      charts:
+        condition: service_completed_successfully
+    image: alpine:3.17.1
+    volumes:
+      - .:/experiment:rw
+    entrypoint: /bin/sh -c
+    command:
+      - |
+        find /experiment/data -type d -exec chmod 777 {} \;
+        find /experiment/charts -type d -exec chmod 777 {} \;
+        find /experiment/data -type f -exec chmod 666 {} \;
+        find /experiment/charts -type f -exec chmod 666 {} \;

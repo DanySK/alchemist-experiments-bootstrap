@@ -24,10 +24,11 @@ sourceSets {
     }
 }
 
-val usesJvm: Int = File(File(projectDir, "util"), "Dockerfile")
-    .readText()
+val usesJvm: Int = File(File(projectDir, "docker/sim"), "Dockerfile")
+    .readLines()
+    .first { it.isNotBlank() }
     .let {
-        Regex("FROM\\s+openjdk:(\\d+)\\s+$").find(it)?.groups?.get(1)?.value
+        Regex("FROM\\s+eclipse-temurin:(\\d+)\\s*$").find(it)?.groups?.get(1)?.value
             ?: throw IllegalStateException("Cannot read information on the JVM to use.")
     }
     .toInt()
