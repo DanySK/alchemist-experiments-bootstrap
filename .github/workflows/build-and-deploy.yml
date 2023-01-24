@@ -52,14 +52,31 @@ jobs:
         with:
           name: charts
           path: charts.tar.zst
+  check-simulations-docker:
+    runs-on: ubuntu-22.04
+    concurrency:
+      group: sim-check${{ github.workflow }}${{ matrix.os }}${{ github.event.number || github.ref }}
+      cancel-in-progress: true
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3.3.0
+    - name: Run compose
+      run: docker-compose up
   release:
     needs:
       - check-simulations-native
+      - check-simulations-docker
       - create-charts
     runs-on: ubuntu-22.04
     concurrency:
       # Only one release job at a time per branch, as only master releases.
       group: release-${{ github.event.number || github.ref }}
+    if: >-
+      !github.event.repository.fork
+      && (
+        github.event_name != 'pull_request'
+        || github.event.pull_request.head.repo.full_name == github.repository
+      )
     steps:
       - name: Checkout
         uses: actions/checkout@v3.3.0
@@ -77,6 +94,8 @@ jobs:
         uses: actions/setup-node@v3.6.0
         with:
           node-version: ${{ steps.node-version.outputs.version }}
+      - name: Login to dockerhub
+        run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin docker.io
       - name: Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}
