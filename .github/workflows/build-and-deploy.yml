@@ -21,6 +21,7 @@ jobs:
         check-command: ./gradlew runAllGraphic
         deploy-command: true
         should-run-codecov: false
+        should-validate-wrapper: ${{ contains('Linux', runner.os) }}
   create-charts:
     runs-on: ubuntu-22.04
     concurrency:
