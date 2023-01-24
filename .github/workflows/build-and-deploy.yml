@@ -55,7 +55,7 @@ jobs:
   check-simulations-docker:
     runs-on: ubuntu-22.04
     concurrency:
-      group: sim-check${{ github.workflow }}${{ matrix.os }}${{ github.event.number || github.ref }}
+      group: container-check${{ github.workflow }}${{ matrix.os }}${{ github.event.number || github.ref }}
       cancel-in-progress: true
     steps:
     - name: Checkout
