@@ -6,6 +6,24 @@
 * **release:** add a preparatory commit for the version updates ([f811f3d](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/f811f3d876b776baf6529dddd36f37cada4236b9))
 * **release:** push the updated files after version calculation ([0311e56](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/0311e56a5110d883c2c71a8a7002445fdbf9adf6))
 
+
+### General maintenance
+
+* **release:** update version descriptors to 1.1.2 ([298c888](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/298c88848084eb3b9af658e867d736bec4e01496))
+
+
+### Build and continuous integration
+
+* **release:** skip the CI process for release commits ([8a0732f](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/8a0732f82b17f5dc85382c4de2716f4d6a10f486))
+
+## [1.1.2](https://github.com/DanySK/alchemist-experiments-bootstrap/compare/1.1.1...1.1.2) (2023-01-24)
+
+
+### Bug Fixes
+
+* **release:** add a preparatory commit for the version updates ([f811f3d](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/f811f3d876b776baf6529dddd36f37cada4236b9))
+* **release:** push the updated files after version calculation ([0311e56](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/0311e56a5110d883c2c71a8a7002445fdbf9adf6))
+
 ## [1.1.1](https://github.com/DanySK/alchemist-experiments-bootstrap/compare/1.1.0...1.1.1) (2023-01-24)
 
 
