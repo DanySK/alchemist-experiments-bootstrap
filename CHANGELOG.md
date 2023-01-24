@@ -1,3 +1,39 @@
+## [1.1.0](https://github.com/DanySK/alchemist-experiments-bootstrap/compare/1.0.1...1.1.0) (2023-01-24)
+
+
+### Features
+
+* run simulations with more variables to make decent charts ([77e6d6d](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/77e6d6d64b2ce74992c2c9cd35b75a2860571a50))
+
+
+### Bug Fixes
+
+* **build:** remove deprecated variable assignment ([6099baf](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/6099baf6f9e666e066f8fd7623a6198521eb46b4))
+* **build:** remove generated data after the simulation container build ([a79dab4](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/a79dab48e41dfc09b213afcae7e29f9767fb9079))
+* **build:** switch to modern JSON effects ([a0ede3b](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/a0ede3bb2bfa5a868d3d918e2b59d2edd95dd39c))
+* **ci:** read the docker password from the CI secrets ([689a3a4](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/689a3a40fef2e65a9dc6eaab3a07378af955b510))
+* **ci:** use a separate concurrency group for the container check job ([d06f389](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/d06f3894edb14f67693aa8da043f670cdbb4a2b3))
+* **release:** publish the images built in CI ([4c7d849](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/4c7d8495adfac26818aa87cab08cc25f954d59aa))
+
+
+### Dependency updates
+
+* **deps:** update alchemist to v25.7.2 ([00b615a](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/00b615ae14b62f677b7410886fef189a61c9645c))
+* **deps:** update dependency xarray to v2023 ([32cc855](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/32cc85583d6967e1d2e740a9641c5011997bb979))
+
+
+### Build and continuous integration
+
+* add a docker check job ([ca6ac93](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/ca6ac934f5e3aeb63eb3350a2d4bdc22ea7cb056))
+* prepare a containerized version of the experiment ([d0ff60e](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/d0ff60eec241b67a43064796fdc24f930d698394))
+
+
+### General maintenance
+
+* **build:** remove aggressive heap settings ([a40d0be](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/a40d0be30b95ec93b5e8baaa32961211d5d6c706))
+* delete Eclipse settings ([807f8d0](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/807f8d0835162d4bf96baf81b4dd686c60abbd67))
+* ignore idea, spyder, gradle, and charts folder ([d92b6e8](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/d92b6e8d52c9cfe0d83de9dc5a03cf26e93d18e6))
+
 ## [1.0.1](https://github.com/DanySK/Alchemist-experiments-startup/compare/1.0.0...1.0.1) (2023-01-19)
 
 
