@@ -1,3 +1,27 @@
+## [1.1.3](https://github.com/DanySK/alchemist-experiments-bootstrap/compare/1.1.2...1.1.3) (2023-01-29)
+
+
+### Bug Fixes
+
+* **release:** move pushes with refreshed versions to the publish phase ([c185161](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/c1851619d8e302165c6eaeaf66ae52c561e1a54c))
+
+
+### Documentation
+
+* **readme:** add a way to re-run the charts generation without re-running experiments ([56c8965](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/56c8965fa8c8f9cff91e99455056392386e37440))
+* **readme:** prepare a readme stub ([e7d7432](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/e7d743218d65a27dad7c463ca2b0c2f83d07ecc0))
+
+
+### Dependency updates
+
+* **deps:** update python docker tag to v3.11.1 ([77f15c1](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/77f15c137c30bd23c948c17e32ec708ce7d88e3c))
+
+
+### Build and continuous integration
+
+* always rebuild the container images ([6a1037a](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/6a1037a5a902e85093f4c2d8a22c7adde31bce53))
+* validate the Gradle wrapper on Linux only ([8846942](https://github.com/DanySK/alchemist-experiments-bootstrap/commit/8846942331bc06bec28d440b42be31054bf07a33))
+
 ## [1.1.2](https://github.com/DanySK/alchemist-experiments-bootstrap/compare/1.1.1...1.1.2) (2023-01-24)
 
 
