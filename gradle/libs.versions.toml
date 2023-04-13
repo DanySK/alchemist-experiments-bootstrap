@@ -1,6 +1,6 @@
 [versions]
 alchemist = "25.14.6"
-kotlin = "1.8.10"
+kotlin = "1.8.20"
 
 [libraries]
 alchemist = { module = "it.unibo.alchemist:alchemist", version.ref = "alchemist" }
