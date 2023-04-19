@@ -11,7 +11,7 @@ alchemist-scafi = { module = "it.unibo.alchemist:alchemist-incarnation-scafi", v
 alchemist-protelis = [ "alchemist", "alchemist-protelis" ]
 
 [plugins]
-gitSemVer = { id = "org.danilopianini.git-sensitive-semantic-versioning", version = "1.1.7" }
+gitSemVer = { id = "org.danilopianini.git-sensitive-semantic-versioning", version = "1.1.8" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-qa = { id = "org.danilopianini.gradle-kotlin-qa", version = "0.38.1" }
 multiJvmTesting = { id = "org.danilopianini.multi-jvm-test-plugin", version = "0.4.20" }
