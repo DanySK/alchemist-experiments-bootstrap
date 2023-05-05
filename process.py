@@ -348,7 +348,17 @@ if __name__ == '__main__':
     import matplotlib.cm as cmx
     matplotlib.rcParams.update({'axes.titlesize': 12})
     matplotlib.rcParams.update({'axes.labelsize': 10})
-    def make_line_chart(xdata, ydata, title = None, ylabel = None, xlabel = None, colors = None, linewidth = 1, errlinewidth = 0.5, figure_size = (6, 4)):
+    def make_line_chart(
+        xdata,
+        ydata,
+        title=None,
+        ylabel=None,
+        xlabel=None,
+        colors=None,
+        linewidth=1,
+        error_alpha=0.2,
+        figure_size=(6, 4)
+    ):
         fig = plt.figure(figsize = figure_size)
         ax = fig.add_subplot(1, 1, 1)
         ax.set_title(title)
@@ -363,7 +373,13 @@ if __name__ == '__main__':
             index += 1
             if error is not None:
                 last_color = lines[-1].get_color()
-                ax.fill_between(xdata, data+error, data-error, facecolor=last_color, alpha=0.2)
+                ax.fill_between(
+                    xdata,
+                    data+error,
+                    data-error,
+                    facecolor=last_color,
+                    alpha=error_alpha,
+                )
         return (fig, ax)
     def generate_all_charts(means, errors = None, basedir=''):
         viable_coords = { coord for coord in means.coords if means[coord].size > 1 }
