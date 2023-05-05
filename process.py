@@ -363,8 +363,7 @@ if __name__ == '__main__':
             index += 1
             if error is not None:
                 last_color = lines[-1].get_color()
-                ax.plot(xdata, data+error, label=None, color=last_color, linewidth=errlinewidth)
-                ax.plot(xdata, data-error, label=None, color=last_color, linewidth=errlinewidth)
+                ax.fill_between(xdata, data+error, data-error, facecolor=last_color, alpha=0.2)
         return (fig, ax)
     def generate_all_charts(means, errors = None, basedir=''):
         viable_coords = { coord for coord in means.coords if means[coord].size > 1 }
