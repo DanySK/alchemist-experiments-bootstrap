@@ -348,6 +348,7 @@ if __name__ == '__main__':
     import matplotlib.cm as cmx
     matplotlib.rcParams.update({'axes.titlesize': 12})
     matplotlib.rcParams.update({'axes.labelsize': 10})
+    
     def make_line_chart(
         xdata,
         ydata,
