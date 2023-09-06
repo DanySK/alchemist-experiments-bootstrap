@@ -49,7 +49,7 @@ jobs:
       - name: Generate archive
         run: tar --use-compress-program zstd -cf charts.tar.zst charts/
       - name: Upload charts
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: charts
           path: charts.tar.zst
