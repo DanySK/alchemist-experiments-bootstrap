@@ -1,3 +1,4 @@
+import org.gradle.configurationcache.extensions.capitalized
 import java.awt.GraphicsEnvironment
 import java.io.ByteArrayOutputStream
 
@@ -47,7 +48,7 @@ dependencies {
 
 // Heap size estimation for batches
 val maxHeap: Long? by project
-val heap: Long = maxHeap ?: if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+val heap: Long = maxHeap ?: if (System.getProperty("os.name").lowercase().contains("linux")) {
     ByteArrayOutputStream().use { output ->
         exec {
             executable = "bash"
@@ -88,33 +89,28 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             description = "Launches graphic simulation ${it.nameWithoutExtension}"
             mainClass.set("it.unibo.alchemist.Alchemist")
             classpath = sourceSets["main"].runtimeClasspath
-            args("-y", it.absolutePath)
-            if (System.getenv("CI") == "true") {
-                args("-hl", "-t", "2")
-            } else {
-                args("-g", "effects/${it.nameWithoutExtension}.json")
-            }
+            args("run", it.absolutePath)
             javaLauncher.set(
                 javaToolchains.launcherFor {
                     languageVersion.set(JavaLanguageVersion.of(usesJvm))
-                }
+                },
             )
-            this.additionalConfiguration()
+            if (System.getenv("CI") == "true") {
+                args("--override", "terminate: { type: AfterTime, parameters: [2] } ")
+                args("--override", "launcher: { type: HeadlessSimulationLauncher, parameters: [] } ")
+            } else {
+                this.additionalConfiguration()
+            }
         }
-        val capitalizedName = it.nameWithoutExtension.capitalize()
-        val graphic by basetask("run${capitalizedName}Graphic")
+        val capitalizedName = it.nameWithoutExtension.capitalized()
+        val graphic by basetask("run${capitalizedName}Graphic") {
+            args("--override", "launcher: { type: SingleRunSwingUI, parameters: { graphics: effects/${it.nameWithoutExtension}.json } }")
+        }
         runAllGraphic.dependsOn(graphic)
         val batch by basetask("run${capitalizedName}Batch") {
             description = "Launches batch experiments for $capitalizedName"
             maxHeapSize = "${minOf(heap.toInt(), Runtime.getRuntime().availableProcessors() * taskSize)}m"
             File("data").mkdirs()
-            args(
-                "-e", "data/${it.nameWithoutExtension}",
-                "-b",
-                "-var", "seed", "spacing", "error",
-                "-p", threadCount,
-                "-i", 1
-            )
         }
         runAllBatch.dependsOn(batch)
     }
