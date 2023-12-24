@@ -17,6 +17,11 @@ seeds:
   scenario: *seed
   simulation: *seed
 
+launcher:
+  type: HeadlessSimulationLauncher
+  parameters:
+    variables: [seed, spacing, error]
+
 network-model:
   type: ConnectWithinDistance
   parameters: [0.5]
