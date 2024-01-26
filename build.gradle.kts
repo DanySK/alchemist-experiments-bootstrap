@@ -97,7 +97,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             )
             if (System.getenv("CI") == "true") {
                 args("--override", "terminate: { type: AfterTime, parameters: [2] } ")
-                args("--override", "launcher: { type: HeadlessSimulationLauncher, parameters: [] } ")
+                args("--override", "launcher: { parameters: { batch: [] } } ")
             } else {
                 this.additionalConfiguration()
             }
