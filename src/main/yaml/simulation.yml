@@ -19,7 +19,7 @@ seeds:
 
 launcher:
   parameters:
-    variables: [seed, spacing, error]
+    batch: [seed, spacing, error]
 
 network-model:
   type: ConnectWithinDistance
