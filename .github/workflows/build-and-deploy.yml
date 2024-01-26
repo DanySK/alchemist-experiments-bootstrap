@@ -111,6 +111,7 @@ jobs:
     needs:
       - create-charts
       - check-simulations-native
+      - check-simulations-docker
       - release
     if: >-
       always() && (
