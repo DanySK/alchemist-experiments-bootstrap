@@ -18,7 +18,6 @@ seeds:
   simulation: *seed
 
 launcher:
-  type: HeadlessSimulationLauncher
   parameters:
     variables: [seed, spacing, error]
 
