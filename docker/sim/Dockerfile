@@ -1,4 +1,4 @@
-FROM eclipse-temurin:19
+FROM eclipse-temurin:21
 RUN mkdir /experiment
 WORKDIR /experiment
 COPY effects effects
