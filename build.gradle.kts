@@ -97,14 +97,18 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             )
             if (System.getenv("CI") == "true") {
                 args("--override", "terminate: { type: AfterTime, parameters: [2] } ")
-                args("--override", "launcher: { parameters: { batch: [] } } ")
             } else {
                 this.additionalConfiguration()
             }
         }
         val capitalizedName = it.nameWithoutExtension.capitalized()
         val graphic by basetask("run${capitalizedName}Graphic") {
-            args("--override", "launcher: { type: SingleRunSwingUI, parameters: { graphics: effects/${it.nameWithoutExtension}.json } }")
+            args(
+                "--override",
+                "monitors: { type: SwingGUI, parameters: { graphics: effects/${it.nameWithoutExtension}.json } }",
+                "--override",
+                "launcher: { parameters: { batch: [], autoStart: false } }",
+            )
         }
         runAllGraphic.dependsOn(graphic)
         val batch by basetask("run${capitalizedName}Batch") {
