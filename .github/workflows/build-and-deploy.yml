@@ -85,7 +85,7 @@ jobs:
           submodules: recursive
           token: ${{ secrets.DEPLOYMENT_TOKEN }}
       - name: Download charts artifact
-        uses: actions/download-artifact@v4.1.3
+        uses: actions/download-artifact@v4.1.4
         with:
           name: charts
       - name: Find the version of Node from package.json
