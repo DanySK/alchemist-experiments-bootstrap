@@ -12,6 +12,8 @@ services:
         mkdir -p /experiment/charts
         chmod 777 /experiment/charts
   simulation:
+    environment:
+      CI: "false"
     depends_on:
       prepare:
         condition: service_completed_successfully
