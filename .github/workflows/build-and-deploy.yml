@@ -61,6 +61,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
+    - name: Prepare docker-compose to be tested in CI
+      run: sed 's/CI:\s.*/CI:\ \"true\"/g' -i docker-compose.yml
     - name: Run compose
       run: docker-compose up --build
   release:
