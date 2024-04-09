@@ -15,7 +15,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
-    - uses: DanySK/build-check-deploy-gradle-action@2.4.10
+    - uses: DanySK/build-check-deploy-gradle-action@2.4.12
       with:
         build-command: true
         check-command: ./gradlew runAllGraphic
@@ -37,7 +37,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
       - name: Install python
-        uses: actions/setup-python@v5.0.0
+        uses: actions/setup-python@v5.1.0
       - name: Upgrade pip
         run: pip install --upgrade pip --user
       - name: Install requirements
