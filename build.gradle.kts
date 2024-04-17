@@ -38,6 +38,14 @@ multiJvm {
     jvmVersionForCompilation.set(usesJvm)
 }
 
+develocity {
+    buildScan {
+        termsOfUseUrl = "https://gradle.com/terms-of-service"
+        termsOfUseAgree = "yes"
+        publishing.onlyIf { it.buildResult.failures.isNotEmpty() }
+    }
+}
+
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(libs.bundles.alchemist.protelis)
