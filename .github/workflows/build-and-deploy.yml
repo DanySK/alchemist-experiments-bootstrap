@@ -64,7 +64,7 @@ jobs:
     - name: Prepare docker-compose to be tested in CI
       run: sed 's/CI:\s.*/CI:\ \"true\"/g' -i docker-compose.yml
     - name: Run compose
-      run: docker-compose up --build
+      run: docker compose up --build
   release:
     needs:
       - check-simulations-native
