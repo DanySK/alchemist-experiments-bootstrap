@@ -1,5 +1,5 @@
 [versions]
-alchemist = "34.0.19"
+alchemist = "34.0.20"
 kotlin = "2.0.0"
 
 [libraries]
