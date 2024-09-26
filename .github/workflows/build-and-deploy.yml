@@ -7,7 +7,7 @@ jobs:
   check-simulations-native:
     strategy:
       matrix:
-        os: [ windows-2022, macos-14, ubuntu-22.04 ]
+        os: [ windows-2022, macos-14, ubuntu-24.04 ]
     runs-on: ${{ matrix.os }}
     concurrency:
       group: sim-check${{ github.workflow }}${{ matrix.os }}${{ github.event.number || github.ref }}
@@ -23,7 +23,7 @@ jobs:
         should-run-codecov: false
         should-validate-wrapper: ${{ contains('Linux', runner.os) }}
   create-charts:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     concurrency:
       group: charts${{ github.workflow }}${{ matrix.os }}${{ github.event.number || github.ref }}
       cancel-in-progress: true
@@ -54,7 +54,7 @@ jobs:
           name: charts
           path: charts.tar.zst
   check-simulations-docker:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     concurrency:
       group: container-check${{ github.workflow }}${{ matrix.os }}${{ github.event.number || github.ref }}
       cancel-in-progress: true
@@ -70,7 +70,7 @@ jobs:
       - check-simulations-native
       - check-simulations-docker
       - create-charts
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     concurrency:
       # Only one release job at a time per branch, as only master releases.
       group: release-${{ github.event.number || github.ref }}
@@ -109,7 +109,7 @@ jobs:
           npm install
           npx semantic-release
   success:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - create-charts
       - check-simulations-native
