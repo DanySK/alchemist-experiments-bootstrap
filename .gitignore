@@ -6,3 +6,4 @@ build/
 charts/
 data_summary_*
 timeprocessed
+.env
