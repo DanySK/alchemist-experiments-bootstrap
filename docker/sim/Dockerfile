@@ -8,6 +8,8 @@ COPY docker docker
 COPY *.kts ./
 COPY *.properties ./
 RUN sed -i '/alias(libs.plugins.gitSemVer)/d' build.gradle.kts
+RUN sed -i '/alias(libs.plugins.multiJvmTesting)/d' build.gradle.kts
+RUN sed -i '/multiJvm {/,/}/d' build.gradle.kts
 COPY gradlew* ./
 RUN CI=true ./gradlew runAllGraphic
 RUN rm -rf data
