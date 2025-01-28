@@ -37,7 +37,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
       - name: Install python
-        uses: actions/setup-python@v5.3.0
+        uses: actions/setup-python@v5.4.0
       - name: Upgrade pip
         run: pip install --upgrade pip --user
       - name: Install requirements
