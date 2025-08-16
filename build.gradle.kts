@@ -1,6 +1,4 @@
-import org.gradle.configurationcache.extensions.capitalized
 import java.awt.GraphicsEnvironment
-import java.io.ByteArrayOutputStream
 
 plugins {
     application
@@ -49,14 +47,14 @@ dependencies {
 // Heap size estimation for batches
 val maxHeap: Long? by project
 val heap: Long = maxHeap ?: if (System.getProperty("os.name").lowercase().contains("linux")) {
-    ByteArrayOutputStream().use { output ->
-        exec {
-            executable = "bash"
-            args = listOf("-c", "cat /proc/meminfo | grep MemAvailable | grep -o '[0-9]*'")
-            standardOutput = output
-        }
-        output.toString().trim().toLong() / 1024
-    }.also { println("Detected ${it}MB RAM available.") } * 9 / 10
+    File("/proc/meminfo").useLines { lines ->
+        lines.firstOrNull { it.startsWith("MemAvailable:") }
+            ?.trim()
+            ?.split(Regex("\\s+"))?.getOrNull(1)?.toLong()
+            ?.let { it / 1024 }
+            ?: error("MemAvailable not found in /proc/meminfo")
+    }.toString().trim().toLong()
+        .also { println("Detected ${it}MB RAM available.") } * 9 / 10
 } else {
     // Guess 16GB RAM of which 2 used by the OS
     14 * 1024L
@@ -101,7 +99,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
                 this.additionalConfiguration()
             }
         }
-        val capitalizedName = it.nameWithoutExtension.capitalized()
+        val capitalizedName = it.nameWithoutExtension.replaceFirstChar { it.uppercase() }
         val graphic by basetask("run${capitalizedName}Graphic") {
             args(
                 "--override",
