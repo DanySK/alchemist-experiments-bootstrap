@@ -1,4 +1,4 @@
-FROM python:3.15.1
+FROM python:3.15.2
 RUN mkdir /experiment
 WORKDIR /experiment
 COPY .python-version ./
